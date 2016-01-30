@@ -6,6 +6,7 @@
 //Sources: http://stackoverflow.com/questions/1081486/setting-background-color-for-the-jframe, https://docs.oracle.com/javase/tutorial/uiswing/events/intro.html 
 //Sources: http://stackoverflow.com/questions/20959053/jframe-buttons-that-change-background-color-of-window, http://www.dreamincode.net/forums/topic/140503-japplet-using-jpanel/
 //Sources: http://www.dmc.fmph.uniba.sk/public_html/doc/Java/ch9.htm#TestingandSettingtheCurrentColors 
+//Sources: http://stackoverflow.com/questions/18704022/set-text-size-of-jcombobox-in-swing, http://www.javaworld.com/article/2076869/learn-java/drawing-text-is-easy-with-three-java-classes.html 
 import java.awt.BorderLayout;     //imports all the stuff required to have the code run, we use commands that only work when these things are imported
 import java.awt.Color;
 import java.awt.Font;
@@ -26,6 +27,8 @@ import javax.swing.event.ChangeListener;
 import javax.swing.JToggleButton;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import java.awt.*; 
+import javax.swing.*; 
 
 public class FontProject extends JFrame      //making a JFrame in our class FontProject
 {
@@ -81,6 +84,16 @@ public class FontProject extends JFrame      //making a JFrame in our class Font
 		FontSelectorCB.addActionListener(FontThing); //add FontThing Listener to the combo box for fonts
 		ControlStuff.add(new JLabel("font: ")); //puts the words "font :" next to the box so that user knows what it controls
 		ControlStuff.add(FontSelectorCB);  //puts the combo box onto the panel
+		FontSelectorCB.setRenderer(new DefaultListCellRenderer(){  //uses the command "setRenderer" to eventually make fonts appear in their font in their combo box
+			public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) { //the function that's called to set the font
+				JLabel label = (JLabel)super.getListCellRendererComponent( //takes the parameters above in
+			            list,value,index,isSelected,cellHasFocus);
+		        Font font = new Font((String)value, Font.PLAIN, 20); //makes them appear in their font size "20"
+		        label.setFont(font);
+		        return label;  //returns it, and lets the fonts appear in their font
+			}
+		}); 
+		
 
 		italCheckB = new JCheckBox("italics");  //makes a checkbox and labels it italics
 		italCheckB.addActionListener(FontThing);   //add Font Thing Listener to the ital box

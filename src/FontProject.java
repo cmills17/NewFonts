@@ -48,21 +48,21 @@ public class FontProject extends JFrame      //making a JFrame in our class Font
 		this.setSize(900, 600); //makes the size of the JFrame that will pop up 900x600
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 
-		JPanel FontColor = new JPanel();
+		JPanel FontColor = new JPanel();   //creates Panel that lets you choose colors for font
 		final JColorChooser colorChooser = new JColorChooser(
-				TheWords.getBackground());
+				TheWords.getBackground());  //takes the string that equals "the words" and sets it to color you selected
 		colorChooser.setBorder(
-				BorderFactory.createTitledBorder("Pick Foreground Color"));
-		ColorSelectionModel model = colorChooser.getSelectionModel();
+				BorderFactory.createTitledBorder("Pick Foreground Color")); //puts these words next to the box so user knows what it controls
+		ColorSelectionModel model = colorChooser.getSelectionModel();  //lets you see the colors in different model
 		ChangeListener changeListener = new ChangeListener() {
-			public void stateChanged(ChangeEvent changeEvent)
+			public void stateChanged(ChangeEvent changeEvent) //once the color has changed, let this be evident by the words
 			{
-				Color newForegroundColor = colorChooser.getColor();
-				if (background)
+				Color newForegroundColor = colorChooser.getColor(); //get the color the user chose and make that the new foreground color 
+				if (background)  //if on background, 
 				{
-					getContentPane().setBackground(newForegroundColor);
+					getContentPane().setBackground(newForegroundColor);//change the background to a new color
 				}
-				else
+				else //if not on background, it will get the words and set them to a new color
 				{
 					TheWords.setForeground(newForegroundColor);
 				}
@@ -75,33 +75,33 @@ public class FontProject extends JFrame      //making a JFrame in our class Font
 		getContentPane().add(TheWords, BorderLayout.NORTH);
 		GraphicsEnvironment g = GraphicsEnvironment
 				.getLocalGraphicsEnvironment();
-		fonts = g.getAvailableFontFamilyNames();
+		fonts = g.getAvailableFontFamilyNames(); //creates the list "fonts" by using a command that imports all the fonts
 
-		JPanel ControlStuff = new JPanel();
+		JPanel ControlStuff = new JPanel();   //creates combo box that has all the fonts in it
 		FontSelectorCB = new JComboBox(fonts);
 		FontSelectorCB.addActionListener(FontThing);
-		ControlStuff.add(new JLabel("font: "));
-		ControlStuff.add(FontSelectorCB);
+		ControlStuff.add(new JLabel("font: ")); //puts the words "font :" next to the box so that user knows what it controls
+		ControlStuff.add(FontSelectorCB);  //adds the Font Selector combo box to 
 
-		italCheckB = new JCheckBox("italics");
-		italCheckB.addActionListener(FontThing);
-		ControlStuff.add(italCheckB);
+		italCheckB = new JCheckBox("italics");  //makes a checkbox and labels it italics
+		italCheckB.addActionListener(FontThing);  
+		ControlStuff.add(italCheckB); //adds the check box onto the panel
 
-		boldCheckB = new JCheckBox("bold");
+		boldCheckB = new JCheckBox("bold"); //puts "bold" next to the checkbox, so user knows what it does
 		boldCheckB.addActionListener(FontThing);
 		ControlStuff.add(boldCheckB);
 
-		Integer[] sizes = { 12, 14, 18, 20, 22, 24, 36 };
+		Integer[] sizes = { 12, 14, 18, 20, 22, 24, 36 }; //creates a list of numbers called sizes which will be used to change font size
 
 		SizeSelectorCB = new JComboBox(sizes);
-		SizeSelectorCB.setSelectedIndex(4);
+		SizeSelectorCB.setSelectedIndex(4);  //sets font to the fourth number in the list (20) each time you open the JFrame
 		SizeSelectorCB.addActionListener(FontThing);
-		ControlStuff.add(new JLabel("size: "));
-		ControlStuff.add(SizeSelectorCB);
+		ControlStuff.add(new JLabel("size: ")); //puts the words "Size :" in front of the combo box with the sizes, so you know what it does
+		ControlStuff.add(SizeSelectorCB); //puts the combo box that lets user change the size next to the box
 
 		getContentPane().add(ControlStuff, BorderLayout.SOUTH);
 
-		tglbtnEditBackground = new JToggleButton("Edit Background");
+		tglbtnEditBackground = new JToggleButton("Edit Background"); //creates toggle button labeled "Edit Background"
 		tglbtnEditBackground.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e)
 			{
@@ -117,8 +117,8 @@ public class FontProject extends JFrame      //making a JFrame in our class Font
 				}
 			}
 		});
-		ControlStuff.add(tglbtnEditBackground);
-		FontThing.updateText();
+		ControlStuff.add(tglbtnEditBackground); //adds the toggle button to the bottom of the JFrame
+		FontThing.updateText(); 
 
 		this.setVisible(true);
 	}
@@ -127,23 +127,23 @@ public class FontProject extends JFrame      //making a JFrame in our class Font
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			updateText();
+			updateText(); 
 		}
 
 		public void updateText()
 		{
-			String name = (String) FontSelectorCB.getSelectedItem();
+			String name = (String) FontSelectorCB.getSelectedItem(); //
 
-			Integer size = (Integer) SizeSelectorCB.getSelectedItem();
+			Integer size = (Integer) SizeSelectorCB.getSelectedItem(); //whatever number the user chose from the sizes combo box, remember it as Integer: 'size'
 
 			int style;
-			if (boldCheckB.isSelected() && italCheckB.isSelected())
+			if (boldCheckB.isSelected() && italCheckB.isSelected())  //if bold and italics are checked, set the style to that
 				style = Font.BOLD | Font.ITALIC;
-			else if (boldCheckB.isSelected())
+			else if (boldCheckB.isSelected()) //if just bold is selected, set the style of font to bold
 				style = Font.BOLD;
-			else if (italCheckB.isSelected())
+			else if (italCheckB.isSelected()) //if ital is checked, set the style of font to ital
 				style = Font.ITALIC;
-			else
+			else //if nothing is checked, leave the font style as is
 				style = Font.PLAIN;
 
 			Font f = new Font(name, style, size.intValue());  //sets the input of text "the Words" to whatever font, size, etc. we want

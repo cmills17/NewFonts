@@ -13,6 +13,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel; 
 import javax.swing.JPanel;
 
+/*This entire project was the first draft and it somehow was enterred into the new github repository.
+I messed up the github and this being here was my fault. This isn't the project it was the first thing we did only.
+*/
+
 public class fontComboBox extends JFrame implements ActionListener {
   JLabel fontLabel = new JLabel(
       "The quick brown fox jumps over the lazy dog.");
